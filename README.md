@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chat Thread Analyzer
 
-## Getting Started
+A Next.js application that analyzes Microsoft Teams chat threads to extract problems and their solutions using AI, helping healthcare support teams build knowledge bases.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Modern, responsive UI built with Next.js, Tailwind CSS, and Material UI
+- Chat thread input with large text area
+- AI-powered analysis of chat content
+- Support for both OpenAI API and local Ollama models
+- Privacy-focused option to keep data local with Ollama
+- Automatic extraction of problems and solutions
+- Results displayed in expandable accordion components
+- JSON export functionality
+- Google Material Design aesthetics
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js 18.x or later
+- For OpenAI: An OpenAI API key
+- For Ollama: [Ollama](https://ollama.ai/) installed and running locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd chat-analyzer
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Create a `.env.local` file in the root directory and add your OpenAI API key (if using OpenAI):
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Start the development server:
+   
+   **Bash/CMD:**
+   ```bash
+   npm run dev
+   ```
+   
+   **PowerShell:**
+   ```powershell
+   # Use the provided PowerShell script
+   .\run-dev.ps1
+   
+   # Or run the command directly
+   npm run dev
+   ```
 
-## Deploy on Vercel
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to use the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Select your preferred AI engine (OpenAI or Ollama)
+   - OpenAI: Uses the OpenAI API (requires API key)
+   - Ollama: Uses a locally running Ollama instance (keeps data private)
+
+2. Configure your model settings (optional)
+   - OpenAI: Choose between gpt-3.5-turbo, gpt-4, etc.
+   - Ollama: Set URL and model name (e.g., llama3, mistral, phi)
+
+3. Paste a Microsoft Teams chat thread into the text area on the left side
+
+4. Click the "Analyze Chat" button
+
+5. View extracted problems and solutions in the accordions on the right side
+
+6. Download the analysis results as a JSON file using the Download button
+
+## Setting Up Ollama (for Local Analysis)
+
+To use the local Ollama option:
+
+1. Download and install [Ollama](https://ollama.ai/) for your platform
+
+2. Pull a model using the command line:
+   ```bash
+   ollama pull llama3
+   ```
+   (You can replace "llama3" with any other supported model like mistral, phi, etc.)
+
+3. Make sure Ollama is running in the background
+
+4. In the app, select "Ollama (Local)" as your Analysis Engine
+
+## How It Works
+
+The application uses AI models to analyze chat text and identify problems and solutions discussed in the conversation. The process works as follows:
+
+1. User inputs the chat text from Microsoft Teams
+2. User selects the AI engine (OpenAI or Ollama)
+3. The application sends the text to a backend API route
+4. The API route processes the text using the selected model
+5. The AI extracts problems and their corresponding solutions
+6. Results are returned as structured JSON and displayed in the UI
+
+## Technologies Used
+
+- **Frontend**: Next.js, React, Material UI, Tailwind CSS
+- **AI/ML**: OpenAI GPT API, Ollama local models
+- **Styling**: Emotion (CSS-in-JS), Material Design principles
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| OPENAI_API_KEY | Your OpenAI API key for accessing GPT models (required only for OpenAI engine) |
+
+## License
+
+MIT
